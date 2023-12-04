@@ -2,51 +2,51 @@
     {
         "name": "'Standard Room'",
         "rate": 89.99,
-        "discount": 0.1
+        "discount": 1
     },
     {
         "name": "Deluxe Suite",
         "rate": 149.99,
-        "discount": 0.2
+        "discount": 2
     },
     {
         "name": "Ocean View Room",
         "rate": -119.99,
-        "discount": 0.15
+        "discount": 15
     },
     {
         "name": "Family Room",
         "rate": 129.99,
-        "discount": 0.12
+        "discount": 12
     },
     {
         "name": "Executive Suite",
         "rate": 199.99,
-        "discount": 0.25
+        "discount": 25
     },
     {
         "name": "Double Standard Room",
         "rate": 109.99,
-        "discount": 0.18
+        "discount": 18
     },
     {
         "name": "Junior Suite",
         "rate": 169.99,
-        "discount": 0.22
+        "discount": 100
     },
     {
         "name": "Room with Jacuzzi",
         "rate": 139.99,
-        "discount": 0.2
+        "discount": 0
     },
     {
         "name": "Themed Room",
         "rate": 129.99,
-        "discount": 0.15
+        "discount": 150
     },
     {
         "name": "Bridal Suite",
         "rate": 249.99,
-        "discount": 0.3
+        "discount": -3
     }
 ]

@@ -2,71 +2,71 @@
     {
         "name": "John Doe",
         "email": "john.doe@example.com",
-        "checkIn": "2023-12-10",
-        "checkOut": "2023-12-15",
+        "checkIn": "10/12/2023",
+        "checkOut": "15/12/2023",
         "discount": 10
     },
     {
         "name": "Jane Smith",
         "email": "jane.smith@example.com",
-        "checkIn": "2023-12-12",
-        "checkOut": "2023-12-18",
+        "checkIn": "12/12/2023",
+        "checkOut": "18/12/2023",
         "discount": 15
     },
     {
         "name": "Robert Johnson",
         "email": "robert.johnson@example.com",
-        "checkIn": "2023-12-14",
-        "checkOut": "2023-12-20",
+        "checkIn": "14/12/2023",
+        "checkOut": "20/12/2023",
         "discount": 8
     },
     {
         "name": "Emily Davis",
         "email": "emily.davis@example.com",
-        "checkIn": "2023-12-16",
-        "checkOut": "2023-12-22",
+        "checkIn": "16/12/2023",
+        "checkOut": "22/12/2023",
         "discount": 12
     },
     {
         "name": "William Brown",
         "email": "william.brown@example.com",
-        "checkIn": "2023-12-18",
-        "checkOut": "2023-12-25",
+        "checkIn": "18/12/2023",
+        "checkOut": "25/12/2023",
         "discount": 20
     },
     {
         "name": "Olivia White",
         "email": "olivia.white@example.com",
-        "checkIn": "2023-12-20",
-        "checkOut": "2023-12-28",
+        "checkIn": "20/12/2023",
+        "checkOut": "28/12/2023",
         "discount": 18
     },
     {
         "name": "Daniel Miller",
         "email": "daniel.miller@example.com",
-        "checkIn": "2023-12-22",
-        "checkOut": "2023-12-30",
+        "checkIn": "22/12/2023",
+        "checkOut": "30/12/2023",
         "discount": 15
     },
     {
         "name": "Sophia Wilson",
         "email": "sophia.wilson@example.com",
-        "checkIn": "2023-12-24",
-        "checkOut": "2024-01-02",
+        "checkIn": "24/12/2023",
+        "checkOut": "02/01/2024",
         "discount": 10
     },
     {
         "name": "Michael Taylor",
         "email": "michael.taylor@example.com",
-        "checkIn": "2023-12-26",
-        "checkOut": "2024-01-05",
+        "checkIn": "26/12/2023",
+        "checkOut": "05/01/2024",
         "discount": 25
     },
     {
         "name": "Ava Martinez",
         "email": "ava.martinez@example.com",
-        "checkIn": "2023-12-28",
-        "checkOut": "2024-01-08",
+        "checkIn": "28/12/2023",
+        "checkOut": "08/01/2024",
         "discount": 22
     }
 ]
