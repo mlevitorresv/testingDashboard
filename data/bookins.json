@@ -1,0 +1,72 @@
+[
+    {
+        "name": "John Doe",
+        "email": "john.doe@example.com",
+        "checkIn": "2023-12-10",
+        "checkOut": "2023-12-15",
+        "discount": 10
+    },
+    {
+        "name": "Jane Smith",
+        "email": "jane.smith@example.com",
+        "checkIn": "2023-12-12",
+        "checkOut": "2023-12-18",
+        "discount": 15
+    },
+    {
+        "name": "Robert Johnson",
+        "email": "robert.johnson@example.com",
+        "checkIn": "2023-12-14",
+        "checkOut": "2023-12-20",
+        "discount": 8
+    },
+    {
+        "name": "Emily Davis",
+        "email": "emily.davis@example.com",
+        "checkIn": "2023-12-16",
+        "checkOut": "2023-12-22",
+        "discount": 12
+    },
+    {
+        "name": "William Brown",
+        "email": "william.brown@example.com",
+        "checkIn": "2023-12-18",
+        "checkOut": "2023-12-25",
+        "discount": 20
+    },
+    {
+        "name": "Olivia White",
+        "email": "olivia.white@example.com",
+        "checkIn": "2023-12-20",
+        "checkOut": "2023-12-28",
+        "discount": 18
+    },
+    {
+        "name": "Daniel Miller",
+        "email": "daniel.miller@example.com",
+        "checkIn": "2023-12-22",
+        "checkOut": "2023-12-30",
+        "discount": 15
+    },
+    {
+        "name": "Sophia Wilson",
+        "email": "sophia.wilson@example.com",
+        "checkIn": "2023-12-24",
+        "checkOut": "2024-01-02",
+        "discount": 10
+    },
+    {
+        "name": "Michael Taylor",
+        "email": "michael.taylor@example.com",
+        "checkIn": "2023-12-26",
+        "checkOut": "2024-01-05",
+        "discount": 25
+    },
+    {
+        "name": "Ava Martinez",
+        "email": "ava.martinez@example.com",
+        "checkIn": "2023-12-28",
+        "checkOut": "2024-01-08",
+        "discount": 22
+    }
+]
