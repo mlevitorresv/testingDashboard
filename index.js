@@ -40,6 +40,7 @@ class Room {
 
         let totalDaysInRange = 0;
         let occupiedDays = 0;
+        
 
         const checkInDate = new Date(this.bookings.checkIn.split('/').reverse().join('-'));
         const checkOutDate = new Date(this.bookings.checkOut.split('/').reverse().join('-'));
@@ -57,6 +58,41 @@ class Room {
 
         totalDaysInRange = Math.ceil((endDateFormated - startDateFormated) / (1000 * 60 * 60 * 24))
         return (occupiedDays / totalDaysInRange) * 100;
+    }
+
+    totalOccupancyPercentage(rooms, startDate, endDate){
+
+        let totalDaysInRange = 0;
+        let occupiedDays = 0;
+
+        for (const room of rooms) {            
+            const occupancyPercentage = room.occupancyPercentage(startDate, endDate)
+            occupiedDays += (occupancyPercentage / 100) * (endDate - startDate) / (1000 * 60 * 60 *24);
+        }        
+
+        totalDaysInRange = (endDate - startDate) / (1000 * 60 *60 *24)
+        return (occupiedDays / totalDaysInRange) * 100;
+    }
+
+    availableRooms(rooms, startDate, endDate){
+
+        const emptyRooms = [];
+
+        const currentDate = new Date(startDate)
+        const endDateTime  = new Date(endDate)
+
+        while(currentDate <= endDateTime){
+            const isDateOccupied = rooms.forEach(room => room.isOccupied(currentDate));
+            
+            if(!isDateOccupied){
+                emptyRooms.push({
+                    date: new Date(currentDate),
+                    rooms: rooms.filter(room => !room.isOccupied(currentDate)).map(room => room.name)
+                })
+            }
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+        return emptyRooms;
     }
 }
 

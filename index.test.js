@@ -59,4 +59,35 @@ describe('comprobaciones de rooms', () => {
         }
     )
 
+    // test('obtenemos el porcentaje de ocupación de x habitaciones del 10/12/2023 al 20/12/2023, (%) ',
+    //     () => {
+    //         const room = new Room();
+    //         const arrayRooms = [
+    //             new Room(rooms[0].name, bookings, rooms[0].rate, rooms[0].name),
+    //             new Room(rooms[1].name, bookings, rooms[1].rate, rooms[1].name),
+    //             new Room(rooms[2].name, bookings, rooms[2].rate, rooms[2].name),
+    //         ]
+    //         expect(room.totalOccupancyPercentage(arrayRooms, '10/12/2023', '20/12/2023')).toBe(50)
+    //     }
+    // )
+
+    // test('obtener un array vacío ya que las habitaciones que le pasamos están ocupadas del 12/12/2023, 18/12/2023',
+    //     () => {
+    //         const room = new Room();
+    //         const arrayRooms = [
+    //             new Room(rooms[0].name, [bookings[0], bookings[2]], rooms[0].rate, rooms[0].name),
+    //             new Room(rooms[1].name, [bookings[0], bookings[2]], rooms[1].rate, rooms[1].name),
+    //             new Room(rooms[2].name, [bookings[0], bookings[2]], rooms[2].rate, rooms[2].name),
+    //         ]
+
+    //         expect(room.availableRooms(rooms, '10/12/2023', '18/12/2023')).toStrictEqual([])
+    //     }
+        
+    // )
+
+})
+
+
+describe('comprobaciones de Booking', () => {
+    
 })
