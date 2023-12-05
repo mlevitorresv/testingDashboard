@@ -77,11 +77,12 @@ describe('comprobaciones de rooms', () => {
     //         const arrayRooms = [
     //             new Room(rooms[0].name, [bookings[0], bookings[2]], rooms[0].rate, rooms[0].name),
     //             new Room(rooms[1].name, [bookings[0], bookings[2]], rooms[1].rate, rooms[1].name),
-    //             new Room(rooms[2].name, [bookings[0], bookings[2]], rooms[2].rate, rooms[2].name),
-    //        
-    //         expect(room.availableRooms(rooms, '10/12/2023', '18/04/204')).toStrictEqual([])
+    //             new Room(rooms[2].name, [bookings[0], bookings[2]], rooms[2].rate, rooms[2].name)
+    //         ]
+
+    //         expect(room.availableRooms(arrayRooms, '10/12/2023', '18/04/204')).toStrictEqual([]);
     //     }
-        
+
     // )
 
 })
@@ -91,10 +92,10 @@ describe('comprobaciones de Booking', () => {
 
     test('compruebo que el precio final de room[0] en booking[0] es: 4', () => {
         const booking = new Booking(
-            bookings[0].name, 
-            bookings[0].email, 
-            bookings[0].checkIn, 
-            bookings[0].checkOut, 
+            bookings[0].name,
+            bookings[0].email,
+            bookings[0].checkIn,
+            bookings[0].checkOut,
             bookings[0].discount,
             rooms[0]
         )
@@ -104,10 +105,10 @@ describe('comprobaciones de Booking', () => {
 
     test('compruebo que el precio final de room[1] en booking[1] es: 7.5', () => {
         const booking = new Booking(
-            bookings[1].name, 
-            bookings[1].email, 
-            bookings[1].checkIn, 
-            bookings[1].checkOut, 
+            bookings[1].name,
+            bookings[1].email,
+            bookings[1].checkIn,
+            bookings[1].checkOut,
             bookings[1].discount,
             rooms[1]
         )
