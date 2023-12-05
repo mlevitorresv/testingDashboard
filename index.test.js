@@ -1,4 +1,4 @@
-const { Room } = require('./index.js')
+const { Room, Booking } = require('./index.js')
 const bookings = require('./data/bookings.json')
 const rooms = require('./data/rooms.json')
 
@@ -89,5 +89,30 @@ describe('comprobaciones de rooms', () => {
 
 
 describe('comprobaciones de Booking', () => {
-    
+
+    test('compruebo que el precio final de room[0] en booking[0] es: 4', () => {
+        const booking = new Booking(
+            bookings[0].name, 
+            bookings[0].email, 
+            bookings[0].checkIn, 
+            bookings[0].checkOut, 
+            bookings[0].discount,
+            rooms[0]
+        )
+
+        expect(booking.getFee()).toBe(4.0)
+    })
+
+    test('compruebo que el precio final de room[1] en booking[1] es: 7.5', () => {
+        const booking = new Booking(
+            bookings[1].name, 
+            bookings[1].email, 
+            bookings[1].checkIn, 
+            bookings[1].checkOut, 
+            bookings[1].discount,
+            rooms[1]
+        )
+
+        expect(booking.getFee()).toBe(7.5)
+    })
 })

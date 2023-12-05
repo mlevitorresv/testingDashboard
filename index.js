@@ -107,6 +107,28 @@ class Booking {
         this.room = room; //[room]
     }
 
+    getFee(){
+        const rateEuros = Number((this.room.rate / 100).toFixed(2));
+        console.log('rateEuros' + rateEuros)
+        
+        const roomPriceWithDiscount = Number((rateEuros - ((rateEuros * this.room.discount) /  100)).toFixed(2));
+        console.log('roomPriceWithDiscount' + roomPriceWithDiscount)
+
+        const oneDayofBooking = Number((roomPriceWithDiscount - ((roomPriceWithDiscount* this.discount) /100)).toFixed(2));
+        console.log('oneDayofBooking' + oneDayofBooking)
+
+        const checkInFormated = new Date(this.checkIn.split('/').reverse().join('-'));
+        const checkOutFormated = new Date(this.checkOut.split('/').reverse().join('-'));        
+        const timeDiff = new Date(checkOutFormated) - new Date(checkInFormated);
+        
+        const days = Number(Math.ceil(timeDiff / (1000 * 60 * 60 * 24)));
+        console.log('days' + days)
+        
+
+        const totalFee = Number(oneDayofBooking * days);
+        
+        return totalFee;
+    }
 }
 
 module.exports = { Room, Booking };
