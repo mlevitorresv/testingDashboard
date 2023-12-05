@@ -78,9 +78,8 @@ describe('comprobaciones de rooms', () => {
     //             new Room(rooms[0].name, [bookings[0], bookings[2]], rooms[0].rate, rooms[0].name),
     //             new Room(rooms[1].name, [bookings[0], bookings[2]], rooms[1].rate, rooms[1].name),
     //             new Room(rooms[2].name, [bookings[0], bookings[2]], rooms[2].rate, rooms[2].name),
-    //         ]
-
-    //         expect(room.availableRooms(rooms, '10/12/2023', '18/12/2023')).toStrictEqual([])
+    //        
+    //         expect(room.availableRooms(rooms, '10/12/2023', '18/04/204')).toStrictEqual([])
     //     }
         
     // )
