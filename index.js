@@ -78,11 +78,13 @@ class Room {
 
         const emptyRooms = [];
 
-        const currentDate = new Date(startDate)
-        const endDateTime  = new Date(endDate)
+        const currentDate = new Date(startDate.split('/').reverse().join('-'));
+        const endDateTime  = new Date(endDate.split('/').reverse().join('-'));
 
         while(currentDate <= endDateTime){
-            const isDateOccupied = rooms.forEach(room => room.isOccupied(currentDate));
+            console.log(`Dentro del while`)
+            const isDateOccupied = rooms.some(room => room.isOccupied(currentDate));
+            console.log(isDateOccupied)
             
             if(!isDateOccupied){
                 emptyRooms.push({
@@ -109,21 +111,16 @@ class Booking {
 
     getFee(){
         const rateEuros = Number((this.room.rate / 100).toFixed(2));
-        console.log('rateEuros' + rateEuros)
         
         const roomPriceWithDiscount = Number((rateEuros - ((rateEuros * this.room.discount) /  100)).toFixed(2));
-        console.log('roomPriceWithDiscount' + roomPriceWithDiscount)
-
+        
         const oneDayofBooking = Number((roomPriceWithDiscount - ((roomPriceWithDiscount* this.discount) /100)).toFixed(2));
-        console.log('oneDayofBooking' + oneDayofBooking)
-
+        
         const checkInFormated = new Date(this.checkIn.split('/').reverse().join('-'));
         const checkOutFormated = new Date(this.checkOut.split('/').reverse().join('-'));        
         const timeDiff = new Date(checkOutFormated) - new Date(checkInFormated);
         
-        const days = Number(Math.ceil(timeDiff / (1000 * 60 * 60 * 24)));
-        console.log('days' + days)
-        
+        const days = Number(Math.ceil(timeDiff / (1000 * 60 * 60 * 24)));     
 
         const totalFee = Number(oneDayofBooking * days);
         
