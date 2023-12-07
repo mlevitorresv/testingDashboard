@@ -71,19 +71,43 @@ describe('comprobaciones de rooms', () => {
     //     }
     // )
 
-    test('obtener un array vacío ya que las habitaciones que le pasamos están ocupadas del 12/12/2023, 18/12/2023',
+    test('obtener un array vacío ya que las habitaciones que le pasamos están ocupadas del 12/12/2023, 15/12/2023',
         () => {
             const room = new Room();
             const arrayRooms = [
-                new Room(rooms[0].name, [bookings[0], bookings[2]], rooms[0].rate, rooms[0].name),
-                new Room(rooms[1].name, [bookings[0], bookings[2]], rooms[1].rate, rooms[1].name),
-                new Room(rooms[2].name, [bookings[0], bookings[2]], rooms[2].rate, rooms[2].name)
+                new Room(rooms[0].name, [bookings[0]], rooms[0].rate, rooms[0].name)
             ]
 
-            expect(room.availableRooms(arrayRooms, '10/12/2023', '18/04/204')).toStrictEqual([]);
+            expect(room.availableRooms(arrayRooms, '10/12/2023', '15/12/2023')).toStrictEqual([]);
         }
 
     )
+
+    // test('obtener un array con la room[0] ya que las habitaciones que le pasamos están ocupadas del 12/12/2023, 15/12/2023, pero libres el resto de días',
+    //     () => {
+    //         const room = new Room();
+    //         const arrayRooms = [
+    //             new Room(rooms[0].name, [bookings[0]], rooms[0].rate, rooms[0].name)
+    //         ]
+
+    //         expect(room.availableRooms(arrayRooms, '10/12/2023', '18/12/2023')).toStrictEqual([
+    //             {
+    //                 "name": "'Standard Room'",
+    //                 "bookings": [
+    //                     {
+    //                         "name": "John Doe",
+    //                         "email": "john.doe@example.com",
+    //                         "checkIn": "10/12/2023",
+    //                         "checkOut": "15/12/2023",
+    //                         "discount": 10
+    //                     }
+    //                 ],
+    //                 "rate": 89.99,
+    //                 "discount": 1                    
+    //             }
+    //         ]);
+    //     }
+    // )
 
 })
 

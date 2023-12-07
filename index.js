@@ -40,7 +40,7 @@ class Room {
 
         let totalDaysInRange = 0;
         let occupiedDays = 0;
-        
+
 
         const checkInDate = new Date(this.bookings.checkIn.split('/').reverse().join('-'));
         const checkOutDate = new Date(this.bookings.checkOut.split('/').reverse().join('-'));
@@ -60,41 +60,40 @@ class Room {
         return (occupiedDays / totalDaysInRange) * 100;
     }
 
-    totalOccupancyPercentage(rooms, startDate, endDate){
+    totalOccupancyPercentage(rooms, startDate, endDate) {
 
         let totalDaysInRange = 0;
         let occupiedDays = 0;
 
-        for (const room of rooms) {            
+        for (const room of rooms) {
             const occupancyPercentage = room.occupancyPercentage(startDate, endDate)
-            occupiedDays += (occupancyPercentage / 100) * (endDate - startDate) / (1000 * 60 * 60 *24);
-        }        
+            occupiedDays += (occupancyPercentage / 100) * (endDate - startDate) / (1000 * 60 * 60 * 24);
+        }
 
-        totalDaysInRange = (endDate - startDate) / (1000 * 60 *60 *24)
+        totalDaysInRange = (endDate - startDate) / (1000 * 60 * 60 * 24)
         return (occupiedDays / totalDaysInRange) * 100;
     }
 
-    availableRooms(rooms, startDate, endDate){
-
-        const emptyRooms = [];
-
+    availableRooms(rooms, startDate, endDate) {
         const currentDate = new Date(startDate.split('/').reverse().join('-'));
-        const endDateTime  = new Date(endDate.split('/').reverse().join('-'));
+        const endDateTime = new Date(endDate.split('/').reverse().join('-'));
 
-        while(currentDate <= endDateTime){
-            console.log(`Dentro del while`)
-            const isDateOccupied = rooms.some(room => room.isOccupied(currentDate));
-            console.log(isDateOccupied)
-            
-            if(!isDateOccupied){
-                emptyRooms.push({
-                    date: new Date(currentDate),
-                    rooms: rooms.filter(room => !room.isOccupied(currentDate)).map(room => room.name)
-                })
-            }
-            currentDate.setDate(currentDate.getDate() + 1);
-        }
-        return emptyRooms;
+        const availableRooms = rooms.filter((room) => {
+            const isOccupied = room.bookings.some((booking) => {
+                const checkInFormated = new Date(booking.checkIn.split('/').reverse().join('-'));
+                const checkOutFormated = new Date(booking.checkOut.split('/').reverse().join('-'));
+
+                return (
+                    (checkInFormated >= currentDate && checkInFormated < endDateTime) ||
+                    (checkOutFormated > currentDate && checkOutFormated <= endDateTime) ||
+                    (checkInFormated <= currentDate && checkOutFormated >= endDateTime)
+                );
+            });
+
+            return !isOccupied;
+        });
+
+        return availableRooms;
     }
 }
 
@@ -109,21 +108,21 @@ class Booking {
         this.room = room; //[room]
     }
 
-    getFee(){
+    getFee() {
         const rateEuros = Number((this.room.rate / 100).toFixed(2));
-        
-        const roomPriceWithDiscount = Number((rateEuros - ((rateEuros * this.room.discount) /  100)).toFixed(2));
-        
-        const oneDayofBooking = Number((roomPriceWithDiscount - ((roomPriceWithDiscount* this.discount) /100)).toFixed(2));
-        
+
+        const roomPriceWithDiscount = Number((rateEuros - ((rateEuros * this.room.discount) / 100)).toFixed(2));
+
+        const oneDayofBooking = Number((roomPriceWithDiscount - ((roomPriceWithDiscount * this.discount) / 100)).toFixed(2));
+
         const checkInFormated = new Date(this.checkIn.split('/').reverse().join('-'));
-        const checkOutFormated = new Date(this.checkOut.split('/').reverse().join('-'));        
+        const checkOutFormated = new Date(this.checkOut.split('/').reverse().join('-'));
         const timeDiff = new Date(checkOutFormated) - new Date(checkInFormated);
-        
-        const days = Number(Math.ceil(timeDiff / (1000 * 60 * 60 * 24)));     
+
+        const days = Number(Math.ceil(timeDiff / (1000 * 60 * 60 * 24)));
 
         const totalFee = Number(oneDayofBooking * days);
-        
+
         return totalFee;
     }
 }
