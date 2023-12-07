@@ -71,43 +71,28 @@ describe('comprobaciones de rooms', () => {
     //     }
     // )
 
-    test('obtener un array vacío ya que las habitaciones que le pasamos están ocupadas del 12/12/2023, 15/12/2023',
+    test('obtener 0 ya que las habitaciones que le pasamos están ocupadas del 12/12/2023, 15/12/2023',
         () => {
             const room = new Room();
             const arrayRooms = [
                 new Room(rooms[0].name, [bookings[0]], rooms[0].rate, rooms[0].name)
             ]
 
-            expect(room.availableRooms(arrayRooms, '10/12/2023', '15/12/2023')).toStrictEqual([]);
+            expect(room.availableRooms(arrayRooms, '10/12/2023', '15/12/2023')).toBe(0);
         }
 
     )
 
-    // test('obtener un array con la room[0] ya que las habitaciones que le pasamos están ocupadas del 12/12/2023, 15/12/2023, pero libres el resto de días',
-    //     () => {
-    //         const room = new Room();
-    //         const arrayRooms = [
-    //             new Room(rooms[0].name, [bookings[0]], rooms[0].rate, rooms[0].name)
-    //         ]
+    test('obtener un 1 ya que las habitaciones que le pasamos no están ocupadas del 16/12/2023 al 18/12/2023',
+        () => {
+            const room = new Room();  // Asegúrate de que tienes la función availableRooms en la clase Room
+            const arrayRooms = [
+                new Room(rooms[0].name, [bookings[0]], rooms[0].rate, rooms[0].discount),
+            ];
 
-    //         expect(room.availableRooms(arrayRooms, '10/12/2023', '18/12/2023')).toStrictEqual([
-    //             {
-    //                 "name": "'Standard Room'",
-    //                 "bookings": [
-    //                     {
-    //                         "name": "John Doe",
-    //                         "email": "john.doe@example.com",
-    //                         "checkIn": "10/12/2023",
-    //                         "checkOut": "15/12/2023",
-    //                         "discount": 10
-    //                     }
-    //                 ],
-    //                 "rate": 89.99,
-    //                 "discount": 1                    
-    //             }
-    //         ]);
-    //     }
-    // )
+            expect(room.availableRooms(arrayRooms, '16/12/2023', '18/12/2023')).toBe(1);
+        }
+    );
 
 })
 

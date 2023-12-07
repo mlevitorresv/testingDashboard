@@ -77,23 +77,20 @@ class Room {
     availableRooms(rooms, startDate, endDate) {
         const currentDate = new Date(startDate.split('/').reverse().join('-'));
         const endDateTime = new Date(endDate.split('/').reverse().join('-'));
+        let emptyRooms = [];
 
-        const availableRooms = rooms.filter((room) => {
-            const isOccupied = room.bookings.some((booking) => {
+        rooms.forEach(room => {
+            room.bookings.forEach(booking=> {
                 const checkInFormated = new Date(booking.checkIn.split('/').reverse().join('-'));
                 const checkOutFormated = new Date(booking.checkOut.split('/').reverse().join('-'));
-
-                return (
-                    (checkInFormated >= currentDate && checkInFormated < endDateTime) ||
-                    (checkOutFormated > currentDate && checkOutFormated <= endDateTime) ||
-                    (checkInFormated <= currentDate && checkOutFormated >= endDateTime)
-                );
-            });
-
-            return !isOccupied;
+                if (checkInFormated >= endDateTime || checkOutFormated <= currentDate) {
+                    emptyRooms.push(room);
+                }
+            })
         });
 
-        return availableRooms;
+        console.log(emptyRooms)
+        return emptyRooms.length;
     }
 }
 
