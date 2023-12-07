@@ -61,17 +61,30 @@ class Room {
     }
 
     totalOccupancyPercentage(rooms, startDate, endDate) {
-
-        let totalDaysInRange = 0;
-        let occupiedDays = 0;
-
-        for (const room of rooms) {
-            const occupancyPercentage = room.occupancyPercentage(startDate, endDate)
-            occupiedDays += (occupancyPercentage / 100) * (endDate - startDate) / (1000 * 60 * 60 * 24);
-        }
-
-        totalDaysInRange = (endDate - startDate) / (1000 * 60 * 60 * 24)
-        return (occupiedDays / totalDaysInRange) * 100;
+        const startDateTime = new Date(startDate.split('/').reverse().join('-'));
+        const endDateTime = new Date(endDate.split('/').reverse().join('-'));
+    
+        const reservationsInDateRange = rooms.flatMap(room =>
+            room.bookings.filter(booking => {
+                const checkInDate = new Date(booking.checkIn.split('/').reverse().join('-'));
+                const checkOutDate = new Date(booking.checkOut.split('/').reverse().join('-'));
+                return checkInDate <= endDateTime && checkOutDate >= startDateTime;
+            })
+        );
+    
+        const totalOccupiedDays = reservationsInDateRange.reduce((totalDays, booking) => {
+            const checkInDate = new Date(booking.checkIn.split('/').reverse().join('-'));
+            const checkOutDate = new Date(booking.checkOut.split('/').reverse().join('-'));
+            const durationInDays = (checkOutDate - checkInDate) / (24 * 60 * 60 * 1000) + 1;
+            return totalDays + durationInDays;
+        }, 0);
+    
+        
+        const totalDaysInRange = (endDateTime - startDateTime) / (24 * 60 * 60 * 1000) + 1;
+    
+        const occupancyPercentage = (totalOccupiedDays / totalDaysInRange) * 100;
+    
+        return occupancyPercentage;
     }
 
     availableRooms(rooms, startDate, endDate) {

@@ -28,54 +28,72 @@ describe('comprobaciones de rooms', () => {
 
     //
     test('comprobamos que la habitación no esta ocupada', () => {
-        const room = new Room(rooms[0].name, bookings, rooms[0].rate, rooms[0].name);
+        const room = new Room(rooms[0].name, bookings, rooms[0].rate, rooms[0].discount);
         expect(room.isOccupied('04/12/2023')).toBeFalsy();
     })
 
     test('comprobamos que la habitación esta ocupada', () => {
-        const room = new Room(rooms[0].name, bookings, rooms[0].rate, rooms[0].name);
+        const room = new Room(rooms[0].name, bookings, rooms[0].rate, rooms[0].discount);
         expect(room.isOccupied('19/12/2023')).toBeTruthy();
     })
 
     //
     test('obtenemos el porcentaje de ocupación dentro del 04/12/2023 al 08/12/2023 (0%), habitación 1',
         () => {
-            const room = new Room(rooms[0].name, bookings[1], rooms[0].rate, rooms[0].name);
+            const room = new Room(rooms[0].name, bookings[1], rooms[0].rate, rooms[0].discount);
             expect(room.occupancyPercentage('04/12/2023', '08/12/2023')).toBe(0)
         }
     )
 
     test('obtenemos el porcentaje de ocupación dentro del 12/12/2023 al 18/12/2023 (100%), habitación 1',
         () => {
-            const room = new Room(rooms[0].name, bookings[1], rooms[0].rate, rooms[0].name);
+            const room = new Room(rooms[0].name, bookings[1], rooms[0].rate, rooms[0].discount);
             expect(room.occupancyPercentage('12/12/2023', '18/12/2023')).toBe(100)
         }
     )
 
     test('obtenemos el porcentaje de ocupación dentro del 10/12/2023 al 20/12/2023 (50%), habitación 1',
         () => {
-            const room = new Room(rooms[0].name, bookings[0], rooms[0].rate, rooms[0].name);
+            const room = new Room(rooms[0].name, bookings[0], rooms[0].rate, rooms[0].discount);
             expect(room.occupancyPercentage('10/12/2023', '20/12/2023')).toBe(50)
         }
     )
 
-    // test('obtenemos el porcentaje de ocupación de x habitaciones del 10/12/2023 al 20/12/2023, (%) ',
-    //     () => {
-    //         const room = new Room();
-    //         const arrayRooms = [
-    //             new Room(rooms[0].name, bookings, rooms[0].rate, rooms[0].name),
-    //             new Room(rooms[1].name, bookings, rooms[1].rate, rooms[1].name),
-    //             new Room(rooms[2].name, bookings, rooms[2].rate, rooms[2].name),
-    //         ]
-    //         expect(room.totalOccupancyPercentage(arrayRooms, '10/12/2023', '20/12/2023')).toBe(50)
-    //     }
-    // )
+    test('obtenemos el porcentaje de ocupación de x habitaciones del 10/12/2023 al 21/12/2023, (50%) ',
+        () => {
+            const room = new Room();
+            const arrayRooms = [
+                new Room(rooms[0].name, [bookings[0]], rooms[0].rate, rooms[0].discount),
+            ]
+            expect(room.totalOccupancyPercentage(arrayRooms, '10/12/2023', '21/12/2023')).toBe(50)
+        }
+    )
+
+    test('obtenemos el porcentaje de ocupación de x habitaciones del 10/12/2023 al 15/12/2023, (100%) ',
+        () => {
+            const room = new Room();
+            const arrayRooms = [
+                new Room(rooms[0].name, [bookings[0]], rooms[0].rate, rooms[0].discount),
+            ]
+            expect(room.totalOccupancyPercentage(arrayRooms, '10/12/2023', '15/12/2023')).toBe(100)
+        }
+    )
+
+    test('obtenemos el porcentaje de ocupación de x habitaciones del 16/12/2023 al 21/12/2023, (0%) ',
+        () => {
+            const room = new Room();
+            const arrayRooms = [
+                new Room(rooms[0].name, [bookings[0]], rooms[0].rate, rooms[0].discount),
+            ]
+            expect(room.totalOccupancyPercentage(arrayRooms, '16/12/2023', '21/12/2023')).toBe(0)
+        }
+    )
 
     test('obtener 0 ya que las habitaciones que le pasamos están ocupadas del 12/12/2023, 15/12/2023',
         () => {
             const room = new Room();
             const arrayRooms = [
-                new Room(rooms[0].name, [bookings[0]], rooms[0].rate, rooms[0].name)
+                new Room(rooms[0].name, [bookings[0]], rooms[0].rate, rooms[0].discount)
             ]
 
             expect(room.availableRooms(arrayRooms, '10/12/2023', '15/12/2023')).toBe(0);
@@ -85,7 +103,7 @@ describe('comprobaciones de rooms', () => {
 
     test('obtener un 1 ya que las habitaciones que le pasamos no están ocupadas del 16/12/2023 al 18/12/2023',
         () => {
-            const room = new Room();  // Asegúrate de que tienes la función availableRooms en la clase Room
+            const room = new Room();
             const arrayRooms = [
                 new Room(rooms[0].name, [bookings[0]], rooms[0].rate, rooms[0].discount),
             ];
