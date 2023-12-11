@@ -35,15 +35,18 @@ var Room = /** @class */ (function () {
         var endDateFormated = new Date(endDate.split('/').reverse().join('-'));
         var totalDaysInRange = 0;
         var occupiedDays = 0;
-        var checkInDate = new Date(this.bookings.checkIn.split('/').reverse().join('-'));
-        var checkOutDate = new Date(this.bookings.checkOut.split('/').reverse().join('-'));
-        if ((checkInDate >= startDateFormated && checkInDate <= endDateFormated) ||
-            (checkOutDate >= startDateFormated && checkOutDate <= endDateFormated) ||
-            (checkInDate <= startDateFormated && checkOutDate >= endDateFormated)) {
-            var overlapStart = Math.max(startDateFormated.getTime(), checkInDate.getTime());
-            var overlapEnd = Math.min(endDateFormated.getTime(), checkOutDate.getTime());
-            var daysOccupied = Math.ceil((overlapEnd - overlapStart) / (1000 * 60 * 60 * 24));
-            occupiedDays += daysOccupied;
+        for (var _i = 0, _a = this.bookings; _i < _a.length; _i++) {
+            var booking = _a[_i];
+            var checkInDate = new Date(booking.checkIn.split('/').reverse().join('-'));
+            var checkOutDate = new Date(booking.checkOut.split('/').reverse().join('-'));
+            if ((checkInDate >= startDateFormated && checkInDate <= endDateFormated) ||
+                (checkOutDate >= startDateFormated && checkOutDate <= endDateFormated) ||
+                (checkInDate <= startDateFormated && checkOutDate >= endDateFormated)) {
+                var overlapStart = Math.max(startDateFormated.getTime(), checkInDate.getTime());
+                var overlapEnd = Math.min(endDateFormated.getTime(), checkOutDate.getTime());
+                var daysOccupied = Math.ceil((overlapEnd - overlapStart) / (1000 * 60 * 60 * 24));
+                occupiedDays += daysOccupied;
+            }
         }
         totalDaysInRange = Math.ceil((endDateFormated.getTime() - startDateFormated.getTime()) / (1000 * 60 * 60 * 24));
         return (occupiedDays / totalDaysInRange) * 100;

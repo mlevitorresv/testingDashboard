@@ -1,9 +1,16 @@
-class Room {
+interface RoomInterface {
     name: string
-    bookings: Booking[]
+    bookings: Array<BookingInterface>
     rate: number
     discount: number
-    constructor(name: string, bookings: Booking[], rate: number, discount: number) {
+}
+
+class Room implements RoomInterface {
+    name: string
+    bookings: Array<BookingInterface>
+    rate: number
+    discount: number
+    constructor(name: string, bookings: Array<BookingInterface>, rate: number, discount: number) {
         this.name = name; //str
         this.bookings = bookings; //[bookings]
         this.rate = rate / 100; //int (cent)
@@ -45,21 +52,23 @@ class Room {
         let totalDaysInRange = 0;
         let occupiedDays = 0;
 
+        for (const booking of this.bookings) {
 
-        const checkInDate = new Date(this.bookings.checkIn.split('/').reverse().join('-'));
-        const checkOutDate = new Date(this.bookings.checkOut.split('/').reverse().join('-'));
+            const checkInDate = new Date(booking.checkIn.split('/').reverse().join('-'));
+            const checkOutDate = new Date(booking.checkOut.split('/').reverse().join('-'));
 
-        if (
-            (checkInDate >= startDateFormated && checkInDate <= endDateFormated) ||
-            (checkOutDate >= startDateFormated && checkOutDate <= endDateFormated) ||
-            (checkInDate <= startDateFormated && checkOutDate >= endDateFormated)
-        ) {
-            const overlapStart = Math.max(startDateFormated.getTime(), checkInDate.getTime());
-            const overlapEnd = Math.min(endDateFormated.getTime(), checkOutDate.getTime());
-            const daysOccupied = Math.ceil((overlapEnd - overlapStart) / (1000 * 60 * 60 * 24))
-            occupiedDays += daysOccupied;
+            if (
+                (checkInDate >= startDateFormated && checkInDate <= endDateFormated) ||
+                (checkOutDate >= startDateFormated && checkOutDate <= endDateFormated) ||
+                (checkInDate <= startDateFormated && checkOutDate >= endDateFormated)
+            ) {
+                const overlapStart = Math.max(startDateFormated.getTime(), checkInDate.getTime());
+                const overlapEnd = Math.min(endDateFormated.getTime(), checkOutDate.getTime());
+                const daysOccupied = Math.ceil((overlapEnd - overlapStart) / (1000 * 60 * 60 * 24))
+                occupiedDays += daysOccupied;
+            }
         }
-
+        
         totalDaysInRange = Math.ceil((endDateFormated.getTime() - startDateFormated.getTime()) / (1000 * 60 * 60 * 24))
         return (occupiedDays / totalDaysInRange) * 100;
     }
@@ -67,7 +76,7 @@ class Room {
     totalOccupancyPercentage(rooms: Room[], startDate: string, endDate: string) {
         const startDateTime = new Date(startDate.split('/').reverse().join('-'));
         const endDateTime = new Date(endDate.split('/').reverse().join('-'));
-    
+
         const reservationsInDateRange = rooms.flatMap(room =>
             room.bookings.filter(booking => {
                 const checkInDate = new Date(booking.checkIn.split('/').reverse().join('-'));
@@ -75,19 +84,19 @@ class Room {
                 return checkInDate <= endDateTime && checkOutDate >= startDateTime;
             })
         );
-    
+
         const totalOccupiedDays = reservationsInDateRange.reduce((totalDays, booking) => {
             const checkInDate = new Date(booking.checkIn.split('/').reverse().join('-'));
             const checkOutDate = new Date(booking.checkOut.split('/').reverse().join('-'));
             const durationInDays = (checkOutDate.getTime() - checkInDate.getTime()) / (24 * 60 * 60 * 1000) + 1;
             return totalDays + durationInDays;
         }, 0);
-    
-        
+
+
         const totalDaysInRange = (endDateTime.getTime() - startDateTime.getTime()) / (24 * 60 * 60 * 1000) + 1;
-    
+
         const occupancyPercentage = (totalOccupiedDays / totalDaysInRange) * 100;
-    
+
         return occupancyPercentage;
     }
 
@@ -97,7 +106,7 @@ class Room {
         let emptyRooms: Room[] = [];
 
         rooms.forEach(room => {
-            room.bookings.forEach(booking=> {
+            room.bookings.forEach(booking => {
                 const checkInFormated = new Date(booking.checkIn.split('/').reverse().join('-'));
                 const checkOutFormated = new Date(booking.checkOut.split('/').reverse().join('-'));
                 if (checkInFormated >= endDateTime || checkOutFormated <= currentDate) {
@@ -112,15 +121,25 @@ class Room {
 }
 
 
-class Booking {
+interface BookingInterface {
     name: string
     email: string
     checkIn: string
     checkOut: string
     discount: number
-    room: Room[]
+    room: RoomInterface
+}
 
-    constructor(name: string, email: string, checkIn: string, checkOut: string, discount: number, room: Room[]) {
+
+class Booking implements BookingInterface {
+    name: string
+    email: string
+    checkIn: string
+    checkOut: string
+    discount: number
+    room: RoomInterface
+
+    constructor(name: string, email: string, checkIn: string, checkOut: string, discount: number, room: RoomInterface) {
         this.name = name; //str
         this.email = email; //str
         this.checkIn = checkIn; //date

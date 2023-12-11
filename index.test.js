@@ -40,21 +40,21 @@ describe('comprobaciones de rooms', () => {
     //
     test('obtenemos el porcentaje de ocupación dentro del 04/12/2023 al 08/12/2023 (0%), habitación 1',
         () => {
-            const room = new Room(rooms[0].name, bookings[1], rooms[0].rate, rooms[0].discount);
+            const room = new Room(rooms[0].name, [bookings[1]], rooms[0].rate, rooms[0].discount);
             expect(room.occupancyPercentage('04/12/2023', '08/12/2023')).toBe(0)
         }
     )
 
     test('obtenemos el porcentaje de ocupación dentro del 12/12/2023 al 18/12/2023 (100%), habitación 1',
         () => {
-            const room = new Room(rooms[0].name, bookings[1], rooms[0].rate, rooms[0].discount);
+            const room = new Room(rooms[0].name, [bookings[1]], rooms[0].rate, rooms[0].discount);
             expect(room.occupancyPercentage('12/12/2023', '18/12/2023')).toBe(100)
         }
     )
 
     test('obtenemos el porcentaje de ocupación dentro del 10/12/2023 al 20/12/2023 (50%), habitación 1',
         () => {
-            const room = new Room(rooms[0].name, bookings[0], rooms[0].rate, rooms[0].discount);
+            const room = new Room(rooms[0].name, [bookings[0]], rooms[0].rate, rooms[0].discount);
             expect(room.occupancyPercentage('10/12/2023', '20/12/2023')).toBe(50)
         }
     )
